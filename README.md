@@ -17,12 +17,12 @@ The largest difference between the two VBA scripts was the original had a nested
 
 The original code performed an initialization step which set variables (ticker and totalVolume) for the inner for loop to execute on:
 
-For i = 0 To 11
-            
-            ticker = tickers(i)
-            totalVolume = 0 '
+    For i = 0 To 11
+                
+                ticker = tickers(i)
+                totalVolume = 0 '
 
-            *begin inner loop*
+                *begin inner loop*
 
 From the above duplicated code, it would clear out the totalVolume as well as set the ticker to a value in the array based on i. The inner loop would then loop through the rows for the specific ticker set in the outer loop. Then, it would run again, once the outer loop incremented the ticker until all the values in the ticker array had been evaluated for.  
 
@@ -36,7 +36,7 @@ In the refactored code, output arrays were created to store the data as opposed 
 
 The output values could then be reported all at once later, in its own for loop. 
 
-For Z = 0 To 11
+    For Z = 0 To 11
     
             Worksheets("All Stocks Analysis").Activate
             Cells(4 + Z, 1).Value = tickers(Z)
@@ -47,7 +47,7 @@ For Z = 0 To 11
 
 The initialization of totalVolume output array was done in a for loop to itself before looping through the rows. 
  
- For i = 0 To 11
+    For i = 0 To 11
         
         tickerVolumes(i) = 0
         
@@ -55,7 +55,7 @@ The initialization of totalVolume output array was done in a for loop to itself 
 
 Then, the ticker was dynamically set within the second for loop, as opposed to being set by an outer loop. This allows for the for loop to loop through the rows only one time. 
 
- For j = 2 To RowCount
+    For j = 2 To RowCount
 
         '3a) Increase volume for current ticker
             If Cells(j, 1) = tickers(tickerIndex) Then
